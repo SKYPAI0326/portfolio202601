@@ -58,6 +58,15 @@
             color: var(--dark);
         }
 
+        .hero-desc {
+            font-size: clamp(12px, 1.3vw, 14px);
+            font-weight: 400;
+            color: var(--mid);
+            line-height: 1.7;
+            margin-top: 20px;
+            max-width: 320px;
+        }
+
         .hero-right {
             text-align: right;
         }
@@ -172,18 +181,41 @@
             transform: scale(1.5);
         }
 
-        /* Name */
+        /* Name + URL column */
+        .strip-center {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
         .strip-name {
             font-size: clamp(20px, 2.5vw, 28px);
             font-weight: 600;
             letter-spacing: -0.02em;
             color: var(--dark);
-            flex-shrink: 0;
+            line-height: 1.2;
             transition: letter-spacing 0.25s ease;
         }
 
         .strip:hover .strip-name {
             letter-spacing: -0.01em;
+        }
+
+        .strip-url {
+            font-size: 11px;
+            color: var(--subtle);
+            letter-spacing: 0.01em;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            margin-top: 0;
+            transition: max-height 0.22s ease, opacity 0.22s ease, margin-top 0.22s ease;
+        }
+
+        .strip:hover .strip-url {
+            max-height: 20px;
+            opacity: 1;
+            margin-top: 3px;
         }
 
         /* Dashed rule */
@@ -256,12 +288,13 @@
 
 <header class="hero">
     <div class="hero-left">
-        <span class="hero-tag">Portfolio Directory · 2026</span>
+        <span class="hero-tag">數位辦公與 AI 應用培訓班 · 2026</span>
         <h1 class="hero-title">學員<br>線上履歷</h1>
+        <p class="hero-desc">13 位結業學員的個人線上履歷，<br>涵蓋數位工作流程與 AI 工具應用實作成果。</p>
     </div>
     <div class="hero-right">
         <div class="hero-num">13</div>
-        <div class="hero-num-label">位學員線上履歷</div>
+        <div class="hero-num-label">位結業學員</div>
     </div>
 </header>
 
@@ -319,10 +352,13 @@ MEMBERS.forEach((m, i) => {
             <span class="strip-num">${num}</span>
             <span class="strip-dot"></span>
         </div>
-        <div class="strip-name">${m.name}</div>
+        <div class="strip-center">
+            <div class="strip-name">${m.name}</div>
+            <div class="strip-url">${new URL(m.url).hostname}</div>
+        </div>
         <div class="strip-rule"></div>
         <div class="strip-link">
-            <span>查看作品集</span>
+            <span>查看線上履歷</span>
             <span class="strip-arrow">→</span>
         </div>
     `;
